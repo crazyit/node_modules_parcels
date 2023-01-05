@@ -1,0 +1,20 @@
+const isGlob = require('is-glob');
+const fastGlob = require('fast-glob');
+
+function normalisePath(p) {
+  return p.replace(/\\/g, '/');
+}
+
+exports.isGlob = function(p) {
+  return isGlob(normalisePath(p));
+};
+
+exports.glob = function(p, options) {
+  return fastGlob(normalisePath(p), options);
+};
+
+exports.glob.sync = function(p, options) {
+  //todo
+  console.log("glob -> p:",p,"options:",options,"normalisePath(p):",normalisePath(p));
+  return fastGlob.sync(normalisePath(p), options);
+};
